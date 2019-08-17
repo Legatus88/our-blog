@@ -19,7 +19,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to articles_path, flash: { success: "Welcome to Our Blog, #{@user.username}."} }
+        session[:user_id] = @user.id
+        format.html { redirect_to user_path(@user), flash: { success: "Welcome to Our Blog, #{@user.username}."} }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
